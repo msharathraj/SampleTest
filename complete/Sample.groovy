@@ -38,11 +38,11 @@ parameters {
 		echo "Entered steps to do"
 	        
 	      echo "Generating the versionlock file and pushing to the repo"
-	      sh   git pull origin test3
-	      sh   git add --A
-	      sh   git status | grep "nothing to commit"
-	      sh   git commit -am "Committing changes caused by 1.0.0"
-	      sh   git push origin master
+	      bat   git pull origin test3
+	      bat   git add --A
+	      bat   git status | grep "nothing to commit"
+	      bat   git commit -am "Committing changes caused by 1.0.0"
+	      bat   git push origin master
 	    
      }
 }	
