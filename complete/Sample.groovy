@@ -32,4 +32,19 @@ parameters {
           }
         }
     }
+	steps {
+	     shell('''
+	         env
+	         set -e
+
+	         echo "Generating the versionlock file and pushing to the repo"
+	         git pull origin master
+	         git add --all
+	         set +e
+	         git status | grep "nothing to commit"
+	         git commit -am "Committing changes caused by 1.0.0"
+	         git push origin master
+	         
+	     '''.stripIndent())
+     }
 }	
