@@ -1,17 +1,15 @@
-job('example-2') {
-    def project = 'msharathraj/SampleTest'
-	def branchApi = new URL("https://github.com/msharathraj/SampleTest/branches")
-	def branches = new groovy.json.JsonSlurper().parse(branchApi.newReader())
-	branches.each {
-    def branchName = it.name
-    def jobName = "${project}-${branchName}".replaceAll('/','-')
-    job(jobName) {
-        scm {
-            git("git://github.com/${project}.git", branchName)
-        }
-        steps {
-            maven("test -Dproject.name=${project}/${branchName}")
+multibranchPipelineJob('example') {
+    branchSources {
+        git {
+            id('git') // IMPORTANT: use a constant and unique identifier
+            remote('ssh://git@stash.intralinks.com:7999/qe/qe-pom.git')
+            credentialsId('git')
+            includes('JENKINS-*')
         }
     }
-}
+    orphanedItemStrategy {
+        discardOldItems {
+            numToKeep(20)
+        }
+    }
 }
