@@ -21,30 +21,28 @@ parameters {
      label('pr-merged-builds')
      scm {
         git {
-          remote {
-            url('ssh://git@stash.intralinks.com:7999/qe/qe-pom.git')
-            branch("test3")
-            credentials('git')
-            extensions {
-                localBranch('master')
-                wipeOutWorkspace()
+            remote {
+                name('test3')
+                url('https://github.com/msharathraj/SampleTest.git')
             }
-          }
+            branch('master')
+            extensions {
+                mergeOptions {
+                    remote('origin')
+                    branch('master')
+                }
+            }
         }
     }
 	steps {
-	     shell('''
-	         env
-	         set -e
-
-	         echo "Generating the versionlock file and pushing to the repo"
-	         git pull origin master
-	         git add --all
-	         set +e
-	         git status | grep "nothing to commit"
-	         git commit -am "Committing changes caused by 1.0.0"
-	         git push origin master
-	         
-	     '''.stripIndent())
+		echo "Entered steps to do"
+	        
+	      echo "Generating the versionlock file and pushing to the repo"
+	      sh   git pull origin test3
+	      sh   git add --A
+	      sh   git status | grep "nothing to commit"
+	      sh   git commit -am "Committing changes caused by 1.0.0"
+	      sh   git push origin master
+	    
      }
 }	
