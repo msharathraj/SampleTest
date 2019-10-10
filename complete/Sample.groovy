@@ -1,21 +1,17 @@
 job('example-2') {
-    scm {
-        git {
-            remote {
-                name('origin')
-                url('https://github.com/msharathraj/SampleTest.git')
-            }
-            remote {
-                name('upstream')
-                url('https://github.com/msharathraj/SampleTest.git')
-            }
-            branch('test3')
-            extensions {
-                mergeOptions {
-                    remote('test3')
-                    branch('master')
-                }
-            }
+    def project = 'msharathraj/SampleTest'
+	def branchApi = new URL("https://github.com/msharathraj/SampleTest/branches")
+	def branches = new groovy.json.JsonSlurper().parse(branchApi.newReader())
+	branches.each {
+    def branchName = it.name
+    def jobName = "${project}-${branchName}".replaceAll('/','-')
+    job(jobName) {
+        scm {
+            git("git://github.com/${project}.git", branchName)
+        }
+        steps {
+            maven("test -Dproject.name=${project}/${branchName}")
         }
     }
+}
 }
