@@ -24,7 +24,7 @@ parameters {
           remote {
             url('ssh://git@stash.intralinks.com:7999/qe/qe-pom.git')
             branch("develop")
-            credentials(git)
+            credentials('git')
             extensions {
                 localBranch('master')
                 wipeOutWorkspace()
