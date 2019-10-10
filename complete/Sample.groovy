@@ -35,6 +35,10 @@ parameters {
         }
     }
 	steps {
+	
+		shell('''
+	         env
+	         
 		echo "Entered steps to do"
 	        
 	      echo "Generating the versionlock file and pushing to the repo"
@@ -43,6 +47,6 @@ parameters {
 	      bat   git status | grep "nothing to commit"
 	      bat   git commit -am "Committing changes caused by 1.0.0"
 	      bat   git push origin master
-	    
+	    '''.stripIndent())
      }
 }	
