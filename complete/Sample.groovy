@@ -1,4 +1,5 @@
-job('Test') {
+def sampleTest() {
+	node('master'){
 	stage('test'){
 	step{
     scm {
@@ -7,15 +8,10 @@ job('Test') {
                 name('test3')
                 url('https://github.com/msharathraj/SampleTest.git')
             }
-            branch('test2')
-            extensions {
-                mergeOptions {
-                    remote('upstream')
-                    branch('master')
-                }
-            }
+            echo "git checkedout code"
         }
     }
+	}
 	}
 	}
 }
