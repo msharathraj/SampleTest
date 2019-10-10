@@ -1,4 +1,4 @@
-def sampleTest() {
+job('Test') {
 	node('master'){
 	stage('test'){
 	step{
