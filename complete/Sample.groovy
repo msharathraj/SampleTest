@@ -1,17 +1,21 @@
-job('Test') {
-	node('master'){
-	stage('test'){
-	step{
+job('example-2') {
     scm {
-       git {
+        git {
             remote {
-                name('test3')
+                name('origin')
                 url('https://github.com/msharathraj/SampleTest.git')
             }
-            echo "git checkedout code"
+            remote {
+                name('upstream')
+                url('https://github.com/msharathraj/SampleTest.git')
+            }
+            branch('test3')
+            extensions {
+                mergeOptions {
+                    remote('test3')
+                    branch('master')
+                }
+            }
         }
     }
-	}
-	}
-	}
 }
