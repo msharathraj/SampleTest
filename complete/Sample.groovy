@@ -23,7 +23,7 @@ parameters {
         git {
           remote {
             url('ssh://git@stash.intralinks.com:7999/qe/qe-pom.git')
-            branch("develop")
+            branch("test3")
             credentials('git')
             extensions {
                 localBranch('master')
