@@ -11,7 +11,9 @@ job("testjob") {
         }
     }
     steps {
-	     bat label: '', script: 'echo teest'
+	      batchFile('echo Hello World!')
+	     batchFile('git status')
+	     batchFile('git branch')
 	     
      }
 }
