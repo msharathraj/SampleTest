@@ -22,17 +22,21 @@ listView('Git-Flow-Jobs') {
 
 
 multibranchPipelineJob("Merge-Master-Git") {
-     branchSources  {
+
+branchSources {
         git {
-          
+            //id('123456789') // IMPORTANT: use a constant and unique identifier
             remote('https://github.com/msharathraj/SampleTest.git')
-            branch("develop")
-            extensions {
-            localBranch('develop')
-            
-          }
+            //credentialsId('github-ci')
+            includes('JENKINS-*')
         }
     }
+    orphanedItemStrategy {
+        discardOldItems {
+            numToKeep(20)
+        }
+    }
+     
     steps {
 	     batchFile('echo Hello World!')
 	     batchFile('git branch')
