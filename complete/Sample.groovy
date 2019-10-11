@@ -1,8 +1,4 @@
 job("testjob") {
-     parameters {
-         stringParam('BUILD_TAG', '', '')
-     }
-     label('pr-merged-builds')
      scm {
         git {
           remote {
