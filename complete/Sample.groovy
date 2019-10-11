@@ -11,9 +11,7 @@ job("testjob") {
         }
     }
     steps {
-	     bat(
-	     echo "Generating the versionlock file and pushing to the repo"
-	     )
+	     bat label: '', script: 'echo teest'
 	     
      }
 }
