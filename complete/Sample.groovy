@@ -1,4 +1,5 @@
 gitCreds = 'git'
+
 listView('Git-Flow-Jobs') {
 	description("All Git Flow Jobs.")
     filterBuildQueue(true)
@@ -16,38 +17,12 @@ listView('Git-Flow-Jobs') {
         buildButton()
     }
 }
-job("Merge-Release-Git") {
-     scm {
-        git {
-          remote {
-			url('https://github.com/msharathraj/SampleTest.git')
-            branch("develop")
-            extensions {
-                localBranch('develop')
-            }
-          }
-        }
-    }
-    steps {
-	     batchFile('echo Hello World!')
-	     batchFile('git branch')
-	     batchFile('git branch release')
-	     batchFile('git checkout release')
-	     batchFile('git merge develop')
-	     batchFile('git push')
-		 triggers {
-			githubPush()
-		}
-		 mavenJob('mvn clean install') {
-			postBuildSteps('SUCCESS') {
-				batchFile("echo 'run after Maven'")
-			}
-		}
-	 }
-}
 
-job("Merge-Master-Git") {
-     scm {
+
+
+
+multibranchPipelineJob("Merge-Master-Git") {
+     branchSources  {
         git {
           remote {
             url('https://github.com/msharathraj/SampleTest.git')
@@ -65,32 +40,8 @@ job("Merge-Master-Git") {
 	     batchFile('git merge develop')
 		 batchFile('git push')
 		 triggers {
-			githubPush()
+			bitbucketPush()
 		}
 	 }
 }
 
-job("Tag-Creation-Git") {
-     scm {
-        git {
-          remote {
-            url('https://github.com/msharathraj/SampleTest.git')
-            branch("develop")
-            extensions {
-                localBranch('develop')
-            }
-          }
-        }
-    }
-    steps {
-	     batchFile('echo Hello World!')
-	     batchFile('git branch')
-	     batchFile('git checkout master')
-	     batchFile('git merge develop')
-		 batchFile('git push')
-		 triggers {
-			githubPush()
-		}
-
-	 }
-}
