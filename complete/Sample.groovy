@@ -24,7 +24,7 @@ listView('Git-Flow-Jobs') {
 multibranchPipelineJob("Merge-Master-Git") {
 
 branchSources {
-        git {
+        github {
             //id('123456789') // IMPORTANT: use a constant and unique identifier
             remote('https://github.com/msharathraj/SampleTest.git')
             //credentialsId('github-ci')
