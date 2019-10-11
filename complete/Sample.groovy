@@ -11,15 +11,13 @@ job("testjob") {
         }
     }
     steps {
-	     bat echo "Generating the versionlock file and pushing to the repo"
-	     bat    git pull origin master
-	     bat    git add --all
-	         
-		bat	 git commit -am "Committing changes caused by"
-	        bat git push origin master
-	         
-		bat git tag -a "SampleTag"
-	        bat git push --tags
+	     batchFile(echo "Generating the versionlock file and pushing to the repo")
+	     batchFile(git pull origin master)
+	     batchFile(git add --all)
+	     batchFile(git commit -am "Committing changes caused by")
+	     batchFile( git push origin master)
+	     batchFile( git tag -a "SampleTag")
+	        batchFile( git push --tags)
              
      }
 }
