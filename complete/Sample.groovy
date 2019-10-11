@@ -12,7 +12,7 @@ job("testjob") {
     }
     steps {
 	     shell('''
-	         env
+	         cd /Complete
 	         echo "Generating the versionlock file and pushing to the repo"
 	         git pull origin master
 	         git add --all
