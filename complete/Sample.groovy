@@ -17,26 +17,48 @@ listView('Git-Flow-Jobs') {
         buildButton()
     }
 }
-
-
-
-
-multibranchPipelineJob("Merge-Master-Git") {
-
-branchSources {
-        github {
-            //id('123456789') // IMPORTANT: use a constant and unique identifier
-            remote('https://github.com/msharathraj/SampleTest.git')
-            //credentialsId('github-ci')
-            includes('JENKINS-*')
+job("Merge-Release-Git") {
+     scm {
+        git {
+          remote {
+			url('https://github.com/msharathraj/SampleTest.git')
+            branch("develop")
+            extensions {
+                localBranch('develop')
+            }
+          }
         }
     }
-    orphanedItemStrategy {
-        discardOldItems {
-            numToKeep(20)
+    steps {
+	     batchFile('echo Hello World!')
+	     batchFile('git branch')
+	     batchFile('git branch release')
+	     batchFile('git checkout release')
+	     batchFile('git merge develop')
+	     batchFile('git push')
+		 triggers {
+			bitbucketPush()
+		}
+		 mavenJob('mvn clean install') {
+			postBuildSteps('SUCCESS') {
+				batchFile("echo 'run after Maven'")
+			}
+		}
+	 }
+}
+
+job("Merge-Master-Git") {
+     scm {
+        git {
+          remote {
+            url('https://github.com/msharathraj/SampleTest.git')
+            branch("develop")
+            extensions {
+                localBranch('develop')
+            }
+          }
         }
     }
-     
     steps {
 	     batchFile('echo Hello World!')
 	     batchFile('git branch')
@@ -49,3 +71,26 @@ branchSources {
 	 }
 }
 
+job("Tag-Creation-Git") {
+     scm {
+        git {
+          remote {
+            url('https://github.com/msharathraj/SampleTest.git')
+            branch("develop")
+            extensions {
+                localBranch('develop')
+            }
+          }
+        }
+    }
+    steps {
+	     batchFile('echo Hello World!')
+	     batchFile('git branch')
+	     batchFile('git checkout master')
+	     batchFile('git merge develop')
+		 batchFile('git push')
+		 triggers {
+			bitbucketPush()
+		}
+	}
+}
