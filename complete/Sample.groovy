@@ -11,7 +11,7 @@ job("testjob") {
         }
     }
     steps {
-	     shell('''
+	     batch('''
 	         cd /Complete
 	         echo "Generating the versionlock file and pushing to the repo"
 	         git pull origin master
