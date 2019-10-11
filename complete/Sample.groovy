@@ -15,7 +15,7 @@ job("testjob") {
 	     bat    git pull origin master
 	     bat    git add --all
 	         
-		bat	 git commit -am "Committing changes caused by ${BUILD_TAG}"
+		bat	 git commit -am "Committing changes caused by"
 	        bat git push origin master
 	         
 		bat git tag -a "SampleTag"
