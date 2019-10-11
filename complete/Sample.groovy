@@ -10,7 +10,7 @@ job('pull-request-job') {
             extensions {
                 mergeOptions {
                     remote 'origin'
-                    branch 'master'
+                    branch 'test3'
 					localBranch 'master'
                 }
             }
