@@ -5,7 +5,7 @@ job("testjob") {
             url('https://github.com/msharathraj/SampleTest.git')
             branch("test3")
             extensions {
-                localBranch('master')
+                localBranch('test3')
             }
           }
         }
