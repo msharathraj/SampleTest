@@ -1,4 +1,4 @@
-job(j_versionlock) {
+job("testjob") {
      parameters {
          stringParam('BUILD_TAG', '', '')
      }
