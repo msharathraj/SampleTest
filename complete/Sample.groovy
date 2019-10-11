@@ -11,7 +11,8 @@ job("testjob") {
         }
     }
     steps {
-	     bat'''echo "Generating the versionlock file and pushing to the repo"
+	     bat'''
+	     echo Generating the versionlock file and pushing to the repo
 	     '''
 	     
      }
