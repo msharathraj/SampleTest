@@ -6,8 +6,7 @@ job('pull-request-job') {
                 url('https://github.com/msharathraj/SampleTest.git')
             }
 
-            branch '**/pull-requests/**'
-
+           
             extensions {
                 mergeOptions {
                     remote 'origin'
