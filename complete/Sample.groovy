@@ -1,19 +1,31 @@
-job('pull-request-job') {
-    scm {
+job(j_versionlock) {
+     parameters {
+         stringParam('BUILD_TAG', '', '')
+     }
+     label('pr-merged-builds')
+     scm {
         git {
-            remote {
-                name 'origin'
-                url('https://github.com/msharathraj/SampleTest.git')
-            }
-
-           
+          remote {
+            url('https://github.com/msharathraj/SampleTest.git')
+            branch("master")
             extensions {
-                mergeOptions {
-                    remote 'origin'
-                    branch 'sample'
-					localBranch 'master'
-                }
+                localBranch('master')
             }
+          }
         }
     }
+    steps {
+	     shell('''
+	         env
+	         echo "Generating the versionlock file and pushing to the repo"
+	         git pull origin master
+	         git add --all
+	         
+		 git commit -am "Committing changes caused by ${BUILD_TAG}"
+	         it push origin master
+	         
+		 git tag -a "SampleTag"
+	         git push --tags
+             '''.stripIndent())
+     }
 }
