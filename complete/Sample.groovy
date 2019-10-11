@@ -24,12 +24,12 @@ listView('Git-Flow-Jobs') {
 multibranchPipelineJob("Merge-Master-Git") {
      branchSources  {
         git {
-          remote {
-            url('https://github.com/msharathraj/SampleTest.git')
+          
+            remote('https://github.com/msharathraj/SampleTest.git')
             branch("develop")
             extensions {
-                localBranch('develop')
-            }
+            localBranch('develop')
+            
           }
         }
     }
