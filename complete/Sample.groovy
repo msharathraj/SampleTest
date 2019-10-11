@@ -3,7 +3,7 @@ job("testjob") {
         git {
           remote {
             url('https://github.com/msharathraj/SampleTest.git')
-            branch("master")
+            branch("test3")
             extensions {
                 localBranch('master')
             }
