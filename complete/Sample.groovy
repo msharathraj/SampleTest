@@ -1,4 +1,5 @@
 gitCreds = 'git'
+
 listView('Git-Flow-Jobs') {
 	description("All Git Flow Jobs.")
     filterBuildQueue(true)
@@ -36,7 +37,7 @@ job("Merge-Release-Git") {
 	     batchFile('git merge develop')
 	     batchFile('git push')
 		 triggers {
-			githubPush()
+			bitbucketPush()
 		}
 		 mavenJob('mvn clean install') {
 			postBuildSteps('SUCCESS') {
@@ -65,7 +66,7 @@ job("Merge-Master-Git") {
 	     batchFile('git merge develop')
 		 batchFile('git push')
 		 triggers {
-			githubPush()
+			bitbucketPush()
 		}
 	 }
 }
@@ -89,8 +90,7 @@ job("Tag-Creation-Git") {
 	     batchFile('git merge develop')
 		 batchFile('git push')
 		 triggers {
-			githubPush()
+			bitbucketPush()
 		}
-
-	 }
+	}
 }
